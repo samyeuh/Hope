@@ -19,6 +19,11 @@ public class HopeControleur {
         this.hopeService = hopeService;
     }
 
+    @GetMapping("/")
+    public String index() {
+        return "loginPage";
+    }
+
     @GetMapping("/mainData")
     public String showAllMainData(Model model) {
         List<DataHope> dataList = hopeService.getAllMainData();
