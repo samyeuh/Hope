@@ -1,4 +1,4 @@
-package Hope.hope.model;
+package Hope.model;
 
 import jakarta.persistence.*;
 
