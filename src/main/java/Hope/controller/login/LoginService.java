@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LoginService {
@@ -19,9 +20,14 @@ public class LoginService {
 
     public boolean login(String username, String password) {
         // TODO: fix the repository :/
-        List<User> users = userRepository.findPasswordByUsername(username);
-        System.out.println(users.toString() + " users found " + username + password);
-        return !users.isEmpty();
+       Optional<User> users = userRepository.findUserByUsername(username);
+        if (users.isEmpty()){
+            System.out.println("No user found with username: " + username);
+            return false;
+        }
+        User user = users.get();
+        boolean passwordMatch = user.getPassword().equals(password);
+        return passwordMatch;
 
     }
 }

@@ -12,14 +12,14 @@
                 <h1>Welcome</h1>
                 <div class="logo">A</div>
                 <form th:action="@{/login}" method="post" class="login-form">
-                    <label for="username">Username</label>
-                    <input id="username" name="username" placeholder="johndoe">
-                    <label for="password">Password</label>
-                    <input id="password" name="password" placeholder="Enter your password" required type="password">
+                    <label for="username">Nom d'utilisateur</label>
+                    <input id="username" name="username" placeholder="Nom d'utilisateur">
+                    <label for="password">Mot de passe</label>
+                    <input id="password" name="password" placeholder="Entrez votre mot de passe" required type="password">
                     <span class="show-password">&#128065;</span>
-                    <button class="login-button" type="submit">LOGIN</button>
+                    <button class="login-button" type="submit">SE CONNECTER</button>
                 </form>
-                <p class="signup-text">Don’t have an account? <a href="/hope/mainData">Sign Up</a></p>
+                <p class="signup-text">Vous n'avez pas de compte ? <a href="/hope/mainData">Créer un compte</a></p>
             </div>
         </div>
     </body>
