@@ -28,16 +28,24 @@ public class LoginController {
         return "loginPage";
     }
 
-    @PostMapping("/login")
+    // TODO: pour test, à mettre dans un autre controller
+    @RequestMapping("/home")
+    public String home() {
+        return "home";
+    }
+
+    @PostMapping("/do-login")
     public String processLogin(
             @RequestParam("username") String username,
             @RequestParam("password") String password,
             Model model
     ) {
-
+        System.out.println("processLogin Controller: " + username);
         if (loginService.login(username, password)) {
+            System.out.println("Login successful.");
             return "redirect:/home";
         } else {
+            System.out.println("Login failed.");
             model.addAttribute("loginError", true);
             return "loginPage";
         }

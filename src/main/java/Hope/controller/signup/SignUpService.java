@@ -2,6 +2,7 @@ package Hope.controller.signup;
 
 import Hope.model.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,12 +10,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class SignUpService {
 
     private final UserRepository userRepository;
-    // private final BCryptPasswordEncoder passwordEncoder;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
     public SignUpService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        // this.passwordEncoder = new BCryptPasswordEncoder();
+        this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
     @Transactional
@@ -33,9 +34,9 @@ public class SignUpService {
             return false;
         }
 
-        // String encodedPassword = passwordEncoder.encode(password);
+        String encodedPassword = passwordEncoder.encode(password);
 
-        userRepository.insertUser(username, password, firstName, lastName);
+        userRepository.insertUser(username, encodedPassword, firstName, lastName);
         boolean userInserted = userRepository.findUserByUsername(username).isPresent();
 
         if (!userInserted) {
