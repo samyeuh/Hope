@@ -26,5 +26,12 @@ public class HopeService {
 
     public void deleteData(int id){ dataRepository.deleteById(id); }
 
-    public void updateData(DataHope data){ dataRepository.save(data); }
+    public void updateData(DataHope data){
+        if (data.getDescriptionSimple().equals("")) {data.setDescriptionSimple(null);}
+        if (data.getDescriptionDetaillee().equals("")) {data.setDescriptionDetaillee(null);}
+        if (data.getAcces().equals("")) {data.setAcces(null);}
+        if (data.getFeedbackUtilisateurs().equals("")) {data.setFeedbackUtilisateurs(null);}
+
+        dataRepository.save(data);
+    }
 }
