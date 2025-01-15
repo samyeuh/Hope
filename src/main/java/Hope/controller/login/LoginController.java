@@ -28,12 +28,6 @@ public class LoginController {
         return "loginPage";
     }
 
-    // TODO: pour test, à mettre dans un autre controller
-    @RequestMapping("/home")
-    public String home() {
-        return "home";
-    }
-
     @PostMapping("/do-login")
     public String processLogin(
             @RequestParam("username") String username,
