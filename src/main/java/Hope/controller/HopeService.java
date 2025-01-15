@@ -1,11 +1,12 @@
-package Hope.hope.controleur;
+package Hope.controller;
 
-import Hope.hope.model.DataHope;
-import Hope.hope.model.DataRepository;
+import Hope.model.DataHope;
+import Hope.model.DataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class HopeService {
@@ -20,6 +21,8 @@ public class HopeService {
     public List<DataHope> getAllMainData(){
         return dataRepository.findAll();
     }
+
+    public Optional<DataHope> getData(int id){ return dataRepository.findById(id); }
     public void addElement(DataHope dataHope){
         dataRepository.save(dataHope);
     }
