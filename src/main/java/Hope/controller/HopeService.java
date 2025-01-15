@@ -23,4 +23,8 @@ public class HopeService {
     }
 
     public Optional<DataHope> getData(int id){ return dataRepository.findById(id); }
+
+    public void deleteData(int id){ dataRepository.deleteById(id); }
+
+    public void updateData(DataHope data){ dataRepository.save(data); }
 }
