@@ -31,4 +31,18 @@ public class HopeControleur {
 
         return "home";
     }
+
+    @GetMapping("/addElement")
+    public String addElementPage(Model model){
+        DataHope dataHope = new DataHope();
+        model.addAttribute("newDataHope", dataHope);
+        return "addElement";
+    }
+
+    @PostMapping("/submissionAddElement")
+    public String addElement(@ModelAttribute("newDataHope") DataHope dataHope){
+        hopeService.addElement(dataHope);
+
+        return "redirect:/hope/mainData";
+    }
 }

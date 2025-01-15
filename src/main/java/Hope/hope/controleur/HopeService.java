@@ -20,4 +20,7 @@ public class HopeService {
     public List<DataHope> getAllMainData(){
         return dataRepository.findAll();
     }
+    public void addElement(DataHope dataHope){
+        dataRepository.save(dataHope);
+    }
 }
