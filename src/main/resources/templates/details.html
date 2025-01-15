@@ -30,12 +30,12 @@
                 <a class="btn btn-outline-primary btn-sm" target="_blank" th:href="${data.lien}" th:if="${data.lien != null}">
                     <i class="bi bi-arrow-up-square"></i> Accéder au lien
                 </a>
-                <form th:action="@{/hope/details/{idData}(idData=${data.id})}" class="d-inline">
+                <form th:action="@{/update/{idData}(idData=${data.id})}" class="d-inline">
                     <button type="submit" class="btn btn-info btn-sm">
                         <i class="bi bi-pencil-square"></i> Editer
                     </button>
                 </form>
-                <form th:action="@{/hope/details/{idData}(idData=${data.id})}" class="d-inline">
+                <form th:action="@{/delete/{idData}(idData=${data.id})}" class="d-inline">
                     <button type="submit" class="btn btn-info btn-sm">
                         <i class="bi bi-x-square"></i> Supprimer
                     </button>
