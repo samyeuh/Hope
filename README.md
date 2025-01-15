@@ -85,7 +85,7 @@ La documentation complète de l’API REST est accessible via : [http://localhos
 Les suggestions et rapports de bugs sont les bienvenus. Veuillez créer une *issue* sur le dépôt Git.
 
 ## Auteurs
-Projet développé par **[votre équipe]**, dans le cadre du module ALTN72 - Développement Full Stack en Java.
+Projet développé par **[groupe 4]**, dans le cadre du module ALTN72 - Développement Full Stack en Java.
 
 ## Licence
 Ce projet est distribué sous licence MIT. Consultez le fichier `LICENSE` pour plus de détails.

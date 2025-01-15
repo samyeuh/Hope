@@ -58,4 +58,30 @@ public class HopeController {
 
         return "redirect:/hope/mainData";
     }
+    @GetMapping("/update/{id}")
+    public String updateDataById(@PathVariable int id, Model model) {
+        Optional<DataHope> data = hopeService.getData(id);
+        if (data.isPresent()) {
+            DataHope dataObj = data.get();
+            model.addAttribute("data", dataObj);
+        }
+
+        return "update";
+    }
+
+    @PostMapping("/updateData/{id}")
+    public String updateData(@PathVariable int id, @ModelAttribute DataHope dataObj) {
+        dataObj.setId(id);
+        hopeService.updateData(dataObj);
+
+        return "redirect:/details/" + id;
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteDataById(@PathVariable int id) {
+        hopeService.deleteData(id);
+
+        return "redirect:/mainData";
+    }
+
 }
