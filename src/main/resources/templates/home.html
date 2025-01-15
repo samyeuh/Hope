@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,7 +21,10 @@
 
     <!-- Barre de recherche -->
     <div class="search-bar">
-        <form th:action="@{/search}" method="get" style="width: 100%; display: flex;">
+        <a th:href="@{/addElement}" class="btn btn-primary" sec:authorize="hasRole('Admin')">
+            Ajouter un élément
+        </a>
+        <form th:action="@{/search}" method="get">
             <input type="text" placeholder="Recherchez des données..." name="query" th:value="${query}">
             <button type="submit">Rechercher</button>
         </form>
@@ -49,9 +52,6 @@
                     </div>
                 </div>
             </div>
-            <a th:href="@{/hope/addElement}" class="btn btn-primary" >
-                Ajouter un élément
-            </a>
         </div>
     </div>
 </div>

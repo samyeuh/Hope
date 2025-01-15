@@ -56,7 +56,7 @@ public class HopeController {
     public String addElement(@ModelAttribute("newDataHope") DataHope dataHope){
         hopeService.addElement(dataHope);
 
-        return "redirect:/hope/mainData";
+        return "redirect:/home";
     }
     @GetMapping("/update/{id}")
     public String updateDataById(@PathVariable int id, Model model) {
