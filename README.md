@@ -61,9 +61,6 @@ HOPE est une application web visant à remplacer un fichier Excel existant pour 
 4. **Interface Segregation Principle (ISP)**
    - Interfaces spécifiques et bien séparées (ex. `UserRepository` et `DataRepository`).
 
-5. **Dependency Inversion Principle (DIP)**
-   - Utilisation de l'injection de dépendances via `@Autowired` pour découpler les modules de haut niveau des implémentations concrètes.
-
 **Amélioration possible** : Modulariser la configuration de sécurité dans `SecurityConfig`.
 
 ## Déploiement
