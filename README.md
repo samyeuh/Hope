@@ -109,11 +109,11 @@ L’application est accessible via une URL publique. Vous pouvez tester toutes s
 ## Technologies Utilisées
 - **Java** : JDK 17 ou supérieur
 - **Framework** : Spring Boot 3.0
-- **Frontend**: Thymeleaf + HTML + CSS
+- **Frontend**: Thymeleaf(aspect dynamique) + HTML(structure page) + CSS(style)
 - **Sécurité**: Thymeleaf + Spring Security avec gestion des rôles et des permissions
 - **Documentation API**: Swagger UI
 - **Suivi des erreurs**: SLF4J
-- **SGBD** : MariaDB 10.4.28
+- **SGBD** : MariaDB 11.6.2
 - **Gestion de version** : Git (repos sur GitHub/GitLab)
 - **Outils supplémentaires** : Swagger pour la documentation de l'API REST
 - **IDE** : IntelliJ IDEA 2023.2.1
