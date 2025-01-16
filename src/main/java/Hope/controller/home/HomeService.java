@@ -16,7 +16,6 @@ public class HomeService {
     private final UserRepository userRepository;
     private final ToolRepository toolRepository;
 
-    @Autowired
     public HomeService(UserRepository userRepository, ToolRepository toolRepository) {
         this.userRepository = userRepository;
         this.toolRepository = toolRepository;
