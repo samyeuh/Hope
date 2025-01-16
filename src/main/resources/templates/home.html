@@ -11,7 +11,7 @@
 <div class="container">
     <div class="welcome-card">
         <h1>Bonjour, <span th:text="${username}">Utilisateur</span> !</h1>
-        <p>Bienvenue sur votre espace personnel. Recherchez vos données ou explorez les données disponibles.</p>
+        <p>Bienvenue sur votre espace personnel. Recherchez vos outils, explorez les outils disponibles ou proposez vos outils :) </p>
         <form th:action="@{/logout}" method="post">
             <button type="submit" class="logout-btn">Se déconnecter</button>
         </form>
@@ -19,17 +19,17 @@
 
     <div class="search-bar">
         <a th:href="@{/addElement}" class="btn btn-primary" sec:authorize="hasRole('admin')">
-            Ajouter un élément
+            Ajouter un outil
         </a>
         <form th:action="@{/search}" method="get">
-            <input type="text" placeholder="Recherchez des données..." name="query" th:value="${query}">
+            <input type="text" placeholder="Recherchez des outils..." name="query" th:value="${query}">
             <button type="submit">Rechercher</button>
         </form>
     </div>
 
     <div class="proposals-section mt-5">
         <div sec:authorize="hasRole('admin')">
-            <h2 class="text-center mb-4">Propositions d'ajout</h2>
+            <h2 class="text-center mb-4">Propositions d'ajout d'outils</h2>
             <div th:if="${proposalList.size() == 0}" class="text-center">
                 <p>Aucune proposition trouvée.</p>
             </div>
@@ -56,16 +56,16 @@
         <div sec:authorize="hasRole('enseignant')">
             <div class="text-center">
                 <a th:href="@{/proposeAdd}" class="btn btn-success">
-                    Proposer un ajout
+                    Proposer un ajout d'outil
                 </a>
             </div>
         </div>
     </div>
 
     <div class="data-list mt-5">
-        <h2 class="text-center mb-4" th:text="${#strings.isEmpty(query) ? 'Données Disponibles' : 'Résultats pour ' + query }">Données Disponibles</h2>
+        <h2 class="text-center mb-4" th:text="${#strings.isEmpty(query) ? 'Outils disponibles' : 'Résultats pour ' + query }">Outils Disponibles</h2>
         <div th:if="${dataList.size() == 0}" class="text-center">
-            <p>Aucune donnée trouvée.</p>
+            <p>Aucun outils trouvés.</p>
         </div>
         <div class="row g-4" th:if="${dataList.size() > 0}">
             <div class="col-md-4" th:each="data : ${dataList}">
