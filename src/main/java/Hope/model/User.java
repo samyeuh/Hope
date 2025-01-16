@@ -3,7 +3,7 @@ package Hope.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "User", schema="hope")
+@Table(name = "user", schema="hope")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

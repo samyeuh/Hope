@@ -3,7 +3,7 @@ package Hope.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Tool")
+@Table(name = "tool")
 public class Tool {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,10 +31,6 @@ public class Tool {
     @Lob
     @Column(name = "Acces")
     private String acces;
-
-    @Lob
-    @Column(name = "Feedback_utilisateurs")
-    private String feedbackUtilisateurs;
 
     public Integer getId() {
         return id;
@@ -90,14 +86,6 @@ public class Tool {
 
     public void setAcces(String acces) {
         this.acces = acces;
-    }
-
-    public String getFeedbackUtilisateurs() {
-        return feedbackUtilisateurs;
-    }
-
-    public void setFeedbackUtilisateurs(String feedbackUtilisateurs) {
-        this.feedbackUtilisateurs = feedbackUtilisateurs;
     }
 
 }
