@@ -135,3 +135,59 @@ Projet développé par **[groupe 4]**, dans le cadre du module ALTN72 - Dévelop
 
 ## Licence
 Ce projet est distribué sous licence MIT. Consultez le fichier `LICENSE` pour plus de détails.
+
+
+
+## Conformité avec l’approche Clean Code
+Le projet HOPE a été développé en suivant les principes de Clean Code, en mettant particulièrement l’accent sur le **nommage** et la **gestion des erreurs**. Voici des exemples concrets illustrant cette conformité :
+
+### Nommage
+- **Noms des variables** :
+  Les noms sont explicites et décrivent précisément leur rôle.
+  ```java
+  String userFirstName; // Représente le prénom de l'utilisateur.
+  int toolUsageCount;   // Nombre de fois qu’un outil a été utilisé.
+  ```
+- **Noms des classes** :
+  Les classes utilisent un format PascalCase et décrivent leur responsabilité métier.
+  ```java
+  public class UserRepository {
+      
+  }
+  ```
+- **Noms des méthodes** :
+  Les noms suivent le pattern verbe-action pour décrire leur fonctionnalité.
+  ```java
+   public String processLogin(@RequestParam("username") String username, @RequestParam("password") String password, Model model) {
+      // Operation effectué suite au click du bouton se connecter.
+  }
+  ```
+
+### Gestion des erreurs
+- **Exceptions personnalisées** :
+  Des exceptions spécifiques sont utilisées pour décrire les erreurs avec précision.
+  ```java
+public class ResourceNotFoundException extends ResponseStatusException {
+    public ResourceNotFoundException(String resourceName, String fieldName, Object fieldValue) {
+        super(HttpStatus.NOT_FOUND, String.format("%s not found with %s: '%s'", resourceName, fieldName, fieldValue));
+    }
+}
+  ```
+- **Gestion centralisée des exceptions** :
+  Une gestion uniforme des erreurs est mise en place avec un contrôleur dédié.
+  ```java
+
+@ControllerAdvice
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    public ResponseEntity<String> handleUserAlreadyExistsException(UserAlreadyExistsException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getReason());
+    }
+
+ 
+}
+  ```
+
+Ces choix permettent de garantir un code lisible, maintenable et résilient, respectant ainsi les principes fondamentaux du Clean Code.
+
