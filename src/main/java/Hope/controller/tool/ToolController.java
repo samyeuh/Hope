@@ -58,6 +58,7 @@ public class ToolController {
         model.addAttribute("data", data);
         model.addAttribute("comments", feedbackService.getComments(id));
         model.addAttribute("isAdmin", user.getRole().equals("admin"));
+        model.addAttribute("username", user.getFirstName() + " " + user.getLastName());
 
         return "details";
     }
@@ -71,6 +72,7 @@ public class ToolController {
         }
         Tool data = toolService.getTool(id);
         model.addAttribute("data", data);
+        model.addAttribute("username", user.getFirstName() + " " + user.getLastName());
 
         return "update";
     }
@@ -109,6 +111,7 @@ public class ToolController {
         }
         Tool tool = new Tool();
         model.addAttribute("newTool", tool);
+        model.addAttribute("username", user.getFirstName() + " " + user.getLastName());
         return "addElement";
     }
 
