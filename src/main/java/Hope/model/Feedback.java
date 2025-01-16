@@ -1,8 +1,12 @@
 package Hope.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table(name = "feedback", schema = "hope")
@@ -25,6 +29,10 @@ public class Feedback {
     @Lob
     @Column(name = "commentaire", nullable = false)
     private String commentaire;
+
+    @ColumnDefault("curdate()")
+    @Column(name = "date")
+    private LocalDate date;
 
     public Integer getId() {
         return id;
@@ -56,6 +64,20 @@ public class Feedback {
 
     public void setCommentaire(String commentaire) {
         this.commentaire = commentaire;
+    }
+
+    public String getDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate currentDate = LocalDate.now();
+        if (currentDate.isEqual(date)) {
+            return "Aujourd'hui";
+        } else {
+            return date.format(formatter);
+        }
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
 }

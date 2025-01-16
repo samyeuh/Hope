@@ -1,4 +1,4 @@
-package Hope.controller;
+package Hope.controller.tool;
 
 import Hope.model.Tool;
 import Hope.model.ToolRepository;
@@ -9,16 +9,16 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class HopeService {
+public class ToolService {
 
     private final ToolRepository toolRepository;
 
     @Autowired
-    public HopeService(ToolRepository toolRepository){
+    public ToolService(ToolRepository toolRepository){
         this.toolRepository = toolRepository;
     }
 
-    public List<Tool> getAllMainData(){
+    public List<Tool> getAllMainTool(){
         return toolRepository.findAll();
     }
 
