@@ -167,26 +167,82 @@ Le projet HOPE a été développé en suivant les principes de Clean Code, en me
 - **Exceptions personnalisées** :
   Des exceptions spécifiques sont utilisées pour décrire les erreurs avec précision.
   ```java
-public class ResourceNotFoundException extends ResponseStatusException {
+  public class ResourceNotFoundException extends ResponseStatusException {
     public ResourceNotFoundException(String resourceName, String fieldName, Object fieldValue) {
         super(HttpStatus.NOT_FOUND, String.format("%s not found with %s: '%s'", resourceName, fieldName, fieldValue));
     }
-}
+  }
   ```
 - **Gestion centralisée des exceptions** :
   Une gestion uniforme des erreurs est mise en place avec un contrôleur dédié.
   ```java
-
-@ControllerAdvice
-public class GlobalExceptionHandler {
-
+  @ControllerAdvice
+  public class GlobalExceptionHandler {
     @ExceptionHandler(UserAlreadyExistsException.class)
     public ResponseEntity<String> handleUserAlreadyExistsException(UserAlreadyExistsException ex) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getReason());
     }
-
- 
-}
+  }
   ```
 Ces choix permettent de garantir un code lisible, maintenable et résilient, respectant ainsi les principes fondamentaux du Clean Code.
 
+
+
+## Conformité aux principes SOLID
+Le projet HOPE a été conçu en appliquant les principes SOLID lorsque cela était pertinent dans le contexte de notre stack technique basée sur Java et Spring Boot. Voici une analyse détaillée de ces principes :
+
+### 1. Single Responsibility Principle (SRP)
+- Chaque classe remplit une seule responsabilité clairement définie.
+  Exemple :
+*  ```java
+  public class HomeService {
+      // Gestion des opérations sur la page d'accueil, tel que la recherche d'information pour retrouver un élément.
+  }
+
+  public class HomeController {
+      // Gestion des endpoints liés à la page d'accueille.
+  }
+  ```
+  **Pertinence** : Respecté pour garantir la maintenabilité et limiter le couplage entre les modules.
+
+### 2. Open/Closed Principle (OCP)
+- Les classes sont conçues pour être extensibles sans nécessiter leur modification.
+  Exemple :
+
+
+### 3. Liskov Substitution Principle (LSP)
+- Les classes dérivées peuvent remplacer les classes parent sans altérer le comportement attendu.
+  Exemple :
+
+  **Pertinence** : Respecté en assurant l’interchangeabilité des implémentations.
+
+### 4. Interface Segregation Principle (ISP)
+- Les interfaces sont spécifiques à leurs clients.
+  Exemple :
+  ```java
+  public interface UserAuthentication {
+      boolean login(String username, String password);
+  }
+
+  public interface UserAuthorization {
+      boolean hasPermission(String action);
+  }
+  ```
+  **Pertinence** : Respecté pour découper les interfaces liées aux responsabilités spécifiques.
+
+### 5. Dependency Inversion Principle (DIP)
+- Les modules de haut niveau ne dépendent pas des modules de bas niveau, mais d’abstractions.
+  Exemple :
+  ```java
+@Controller
+public class SignUpController {
+
+    private final SignUpService signUpService;
+    private static final Logger logger = LoggerFactory.getLogger(SignUpController.class);
+
+
+    public SignUpController(SignUpService signUpService) {
+        this.signUpService = signUpService;
+    }
+  ```
+  **Pertinence** : Respecté en injectant les dépendances via le constructeur (Spring gère ces injections via @Autowired).
