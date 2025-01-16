@@ -1,6 +1,6 @@
 package Hope.controller.home;
 
-import Hope.model.DataHope;
+import Hope.model.Tool;
 import Hope.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,7 +30,7 @@ public class HomeController {
             return "redirect:/login";
         }
 
-        List<DataHope> dataList = homeService.getPreviewsData();
+        List<Tool> dataList = homeService.getPreviewsData();
         model.addAttribute("dataList", dataList);
 
         return "home";
@@ -53,7 +53,7 @@ public class HomeController {
             return "redirect:/home";
         }
 
-        List<DataHope> searchResults = homeService.searchData(query);
+        List<Tool> searchResults = homeService.searchData(query);
         model.addAttribute("dataList", searchResults);
         model.addAttribute("query", query);
 

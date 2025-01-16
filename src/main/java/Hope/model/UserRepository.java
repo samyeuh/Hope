@@ -15,6 +15,6 @@ public interface UserRepository extends JpaRepository<User,Integer> {
     Optional<User> findUserByUsername(@Param("username") String username);
 
     @Modifying
-    @Query(value = "INSERT INTO user (username, first_name, last_name, role, password) VALUES (:username, :firstName, :lastName, 'Etudiant', :password)", nativeQuery = true)
+    @Query(value = "INSERT INTO user (username, first_name, last_name, role, password) VALUES (:username, :firstName, :lastName, 'etudiant', :password)", nativeQuery = true)
     void insertUser(@Param("username") String username, @Param("password") String password, @Param("firstName") String firstName, @Param("lastName") String lastName);
 }

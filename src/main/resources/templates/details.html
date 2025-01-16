@@ -9,7 +9,7 @@
 </head>
 <body class="bg-light">
 <div class="container py-5">
-    <div class="card shadow-sm">
+    <div class="card shadow-sm mb-4">
         <div class="card-header bg-primary text-white">
             <h2 class="card-title mb-0" th:text="${data.titre}">Titre</h2>
         </div>
@@ -21,27 +21,50 @@
             <p class="card-text" th:text="${data.descriptionSimple}"></p>
             <h4 th:if="${data.descriptionDetaillee != null}">Description</h4>
             <p class="card-text" th:text="${data.descriptionDetaillee}"></p>
-            <h4 th:if="${data.acces != null}">Acces</h4>
-            <p class="card-text" th:text="${data.acces}">Acces</p>
-            <h4 th:if="${data.feedbackUtilisateurs != null}">Retours utilisateur</h4>
-            <p class="card-text" th:text="${data.feedbackUtilisateurs}"></p></div>
-            <br>
-            <div style="margin: 10px;text-align: end">
-                <a class="btn btn-outline-primary btn-sm" target="_blank" th:href="${data.lien}" th:if="${data.lien != null}">
-                    <i class="bi bi-arrow-up-square"></i> Accéder au lien
-                </a>
-                <form th:action="@{/update/{idData}(idData=${data.id})}" class="d-inline">
-                    <button type="submit" class="btn btn-info btn-sm">
-                        <i class="bi bi-pencil-square"></i> Editer
-                    </button>
-                </form>
-                <form th:action="@{/delete/{idData}(idData=${data.id})}" class="d-inline">
-                    <button type="submit" class="btn btn-info btn-sm">
-                        <i class="bi bi-x-square"></i> Supprimer
-                    </button>
-                </form>
-            </div>
+            <h4 th:if="${data.acces != null}">Accès</h4>
+            <p class="card-text" th:text="${data.acces}"></p>
+        </div>
+        <div class="card-footer d-flex justify-content-end">
+            <a class="btn btn-outline-primary btn-sm me-2" target="_blank" th:href="${data.lien}" th:if="${data.lien != null}">
+                <i class="bi bi-arrow-up-square"></i> Accéder au lien
+            </a>
+            <form th:action="@{/update/{idData}(idData=${data.id})}" class="d-inline" th:if="${isAdmin}">
+                <button type="submit" class="btn btn-info btn-sm me-2">
+                    <i class="bi bi-pencil-square"></i> Editer
+                </button>
+            </form>
+            <form th:action="@{/delete/{idData}(idData=${data.id})}" class="d-inline" th:if="${isAdmin}">
+                <button type="submit" class="btn btn-danger btn-sm">
+                    <i class="bi bi-x-square"></i> Supprimer
+                </button>
+            </form>
+        </div>
+    </div>
 
+    <div class="card shadow-sm">
+        <div class="card-header bg-secondary text-white">
+            <h4 class="mb-0">Commentaires</h4>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/addComment/{idData}(idData=${data.id})}" method="post" class="mb-4">
+                <div class="mb-3">
+                    <label for="comment" class="form-label">Ajouter un commentaire</label>
+                    <textarea id="comment" name="comment" class="form-control" rows="3" placeholder="Saisissez votre commentaire ici..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-send"></i> Publier
+                </button>
+            </form>
+
+            <div th:if="${comments != null && comments.size() > 0}">
+                <div th:each="comment : ${comments}" class="border-bottom pb-3 mb-3">
+                    <p class="mb-1"><strong th:text="${comment.user.username}">Auteur</strong> - <span class="text-muted" th:text="${comment.date}">Date</span></p>
+                    <p class="mb-0" th:text="${comment.commentaire}">Commentaire texte</p>
+                </div>
+            </div>
+            <div th:if="${comments == null || comments.size() == 0}" class="text-muted">
+                <p>Aucun commentaire pour le moment.</p>
+            </div>
         </div>
     </div>
 </div>
