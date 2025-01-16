@@ -1,7 +1,7 @@
 package Hope.controller.home;
 
-import Hope.model.DataHope;
-import Hope.model.DataRepository;
+import Hope.model.Tool;
+import Hope.model.ToolRepository;
 import Hope.model.User;
 import Hope.model.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,23 +13,23 @@ import java.util.List;
 public class HomeService {
 
     private final UserRepository userRepository;
-    private final DataRepository dataRepository;
+    private final ToolRepository toolRepository;
 
     @Autowired
-    public HomeService(UserRepository userRepository, DataRepository dataRepository) {
+    public HomeService(UserRepository userRepository, ToolRepository toolRepository) {
         this.userRepository = userRepository;
-        this.dataRepository = dataRepository;
+        this.toolRepository = toolRepository;
     }
 
     public User getUser(String username) {
         return userRepository.findUserByUsername(username).orElse(null);
     }
 
-    public List<DataHope> getPreviewsData() {
-        return dataRepository.findAll();
+    public List<Tool> getPreviewsData() {
+        return toolRepository.findAll();
     }
 
-    public List<DataHope> searchData(String query) {
-        return dataRepository.search(query);
+    public List<Tool> searchData(String query) {
+        return toolRepository.search(query);
     }
 }

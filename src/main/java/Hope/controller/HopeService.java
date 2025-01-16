@@ -1,7 +1,7 @@
 package Hope.controller;
 
-import Hope.model.DataHope;
-import Hope.model.DataRepository;
+import Hope.model.Tool;
+import Hope.model.ToolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,16 +11,16 @@ import java.util.Optional;
 @Service
 public class HopeService {
 
-    private final DataRepository dataRepository;
+    private final ToolRepository toolRepository;
 
     @Autowired
-    public HopeService(DataRepository dataRepository){
-        this.dataRepository = dataRepository;
+    public HopeService(ToolRepository toolRepository){
+        this.toolRepository = toolRepository;
     }
 
-    public List<DataHope> getAllMainData(){
-        return dataRepository.findAll();
+    public List<Tool> getAllMainData(){
+        return toolRepository.findAll();
     }
 
-    public Optional<DataHope> getData(int id){ return dataRepository.findById(id); }
+    public Optional<Tool> getData(int id){ return toolRepository.findById(id); }
 }

@@ -1,6 +1,6 @@
 package Hope.controller;
 
-import Hope.model.DataHope;
+import Hope.model.Tool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,16 +28,16 @@ public class HopeController {
 
     @GetMapping("/mainData")
     public String showAllMainData(Model model) {
-        List<DataHope> dataList = hopeService.getAllMainData();
+        List<Tool> dataList = hopeService.getAllMainData();
         model.addAttribute("dataList", dataList);
         return "home";
     }
 
     @GetMapping("/details/{id}")
     public String getDataById(@PathVariable int id, Model model) {
-        Optional<DataHope> data = hopeService.getData(id);
+        Optional<Tool> data = hopeService.getData(id);
         if (data.isPresent()) {
-            DataHope dataObj = data.get();
+            Tool dataObj = data.get();
             model.addAttribute("data", dataObj);
         }
 

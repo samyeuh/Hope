@@ -3,8 +3,8 @@ package Hope.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "hope")
-public class DataHope {
+@Table(name = "Tool")
+public class Tool {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
