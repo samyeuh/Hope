@@ -13,7 +13,6 @@ public class ToolService {
 
     private final ToolRepository toolRepository;
 
-    @Autowired
     public ToolService(ToolRepository toolRepository){
         this.toolRepository = toolRepository;
     }

@@ -18,7 +18,6 @@ public class SignUpService {
     private final BCryptPasswordEncoder passwordEncoder;
     private static final Logger logger = LoggerFactory.getLogger(SignUpService.class);
 
-    @Autowired
     public SignUpService(UserRepository userRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = new BCryptPasswordEncoder();

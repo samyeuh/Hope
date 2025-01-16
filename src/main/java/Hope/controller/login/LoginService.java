@@ -18,7 +18,6 @@ public class LoginService {
     private static final Logger logger = LoggerFactory.getLogger(LoginService.class);
 
 
-    @Autowired
     public LoginService(UserRepository userRepository) {
         this.userRepository = userRepository;
        this.passwordEncoder = new BCryptPasswordEncoder();

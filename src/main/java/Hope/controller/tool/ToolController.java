@@ -24,7 +24,6 @@ public class ToolController {
     private final HomeService homeService;
     private static final Logger logger = LoggerFactory.getLogger(ToolController.class);
 
-    @Autowired
     public ToolController(ToolService toolService, FeedbackService feedbackService, HomeService homeService) {
         this.toolService = toolService;
         this.feedbackService = feedbackService;
