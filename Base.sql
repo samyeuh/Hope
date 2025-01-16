@@ -99,11 +99,16 @@ INSERT INTO tool (Titre, Domaine, Lien, Description_simple, Description_detaille
 -- Insertion des données dans la table User
 INSERT INTO user (username, first_name, last_name, role, password)
 VALUES
-    ('admin1', 'Alice', 'Admin', 'admin', 'password123'),
-    ('etudiant1', 'Bob', 'Etudiant', 'étudiant', 'password123'),
-    ('etudiant2', 'Claire', 'Etudiant', 'étudiant', 'password123'),
-    ('enseignant1', 'David', 'Enseignant', 'enseignant', 'password123'),
-    ('enseignant2', 'Eve', 'Enseignant', 'enseignant', 'password123');
+    ('admin1fake', 'Alice', 'Admin', 'admin', 'password123'),
+    ('etudiant1fake', 'Bob', 'Etudiant', 'étudiant', 'password123'),
+    ('etudiant2fake', 'Claire', 'Etudiant', 'étudiant', 'password123'),
+    ('enseignant1fake', 'David', 'Enseignant', 'enseignant', 'password123'),
+    ('enseignant2fake', 'Eve', 'Enseignant', 'enseignant', 'password123'),
+    ('admin1', 'Alice', 'Admin', 'admin', '$2a$10$zy1c9V58g0FLR3Ifd3OLIeq/DR4QGF28xLvbLeGxT0KiP5E2T2Bua'),
+    ('etudiant1', 'Bob', 'Etudiant', 'etudiant', '$2a$10$FLJSkmEhQhseg6/MMtkFJuf7Nh230N0ip5eIIewZ01PKA5plqx35e'),
+    ('etudiant2', 'Claire', 'Etudiant', 'etudiant', '$2a$10$jp5JhCdMTTR1jt9riQ/tyO./Q0almYVYlFaAE/zRcfHds8tKmAQQS'),
+    ('enseignant1', 'David', 'Enseignant', 'enseignant', '$2a$10$K1GCijlOCMbpOtt76cJj2.h62X3/esMDlmSDjqk56Iro0F9at4Tcy'),
+    ('enseignant2', 'Eve', 'Enseignant', 'enseignant', '$2a$10$ac67WIDnG3KPCG/vxMD8Xe3KytrRcWcrZR0bjl0qjuPDKAElmLMvm');
 
 -- Insertion des données dans la table Feedback
 INSERT INTO feedback (user_id, tool_id, commentaire)
@@ -112,4 +117,5 @@ VALUES
     (3, 2, 'Très utile pour des exercices de codage en temps réel.'),
     (4, 3, 'Excellent pour gérer des classes en ligne.'),
     (5, 4, 'Jupyter Notebook est parfait pour les projets en Python.'),
+    (2, 2, 'Samy le goat !'),
     (2, 5, 'Repl.it facilite le codage directement depuis un navigateur.');
