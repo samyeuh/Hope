@@ -1,0 +1,13 @@
+services:
+  hope:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - "${configPath}:/app/config/"
+  bdd:
+    image: "mariadb:latest"
+    ports:
+      - "3306:3306"
+    environment:
+      MARIADB_ROOT_PASSWORD: "superSecuredPassword"
