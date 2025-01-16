@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ToolService {
@@ -33,7 +32,6 @@ public class ToolService {
         if (data.getDescriptionSimple().isEmpty()) {data.setDescriptionSimple(null);}
         if (data.getDescriptionDetaillee().isEmpty()) {data.setDescriptionDetaillee(null);}
         if (data.getAcces().isEmpty()) {data.setAcces(null);}
-
         toolRepository.save(data); }
 
     public void addTool(Tool data){ toolRepository.save(data); }

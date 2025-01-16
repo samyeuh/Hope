@@ -1,5 +1,7 @@
 package Hope.controller.signup;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class SignUpController {
 
     private final SignUpService signUpService;
+    private static final Logger logger = LoggerFactory.getLogger(SignUpController.class);
+
 
     public SignUpController(SignUpService signUpService) {
         this.signUpService = signUpService;
@@ -22,6 +26,7 @@ public class SignUpController {
 
     @RequestMapping("/signUp-error")
     public String signUpError(Model model) {
+        logger.error("Erreur lors de l'inscription");
         model.addAttribute("signUpError", true);
         return "signUpPage";
     }
@@ -35,11 +40,12 @@ public class SignUpController {
             Model model
     ) {
         if (signUpService.signUp(username, password, firstName, lastName)) {
+            logger.info("Inscription réussie pour l'utilisateur '{}'", username);
             return "redirect:/login";
         } else {
+            logger.warn("Échec de l'inscription pour l'utilisateur '{}'", username);
             model.addAttribute("signUpError", true);
             return "signUpPage";
         }
-
     }
 }

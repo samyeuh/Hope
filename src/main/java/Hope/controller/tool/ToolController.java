@@ -5,6 +5,8 @@ import Hope.controller.home.HomeService;
 import Hope.exceptions.UnauthorizedActionException;
 import Hope.model.Tool;
 import Hope.model.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/")
@@ -21,6 +22,7 @@ public class ToolController {
     private final ToolService toolService;
     private final FeedbackService feedbackService;
     private final HomeService homeService;
+    private static final Logger logger = LoggerFactory.getLogger(ToolController.class);
 
     @Autowired
     public ToolController(ToolService toolService, FeedbackService feedbackService, HomeService homeService) {
@@ -36,6 +38,7 @@ public class ToolController {
 
     @GetMapping("/mainData")
     public String showAllMainData(Model model) {
+        logger.info("Chargement de la page d'accueil");
         List<Tool> dataList = toolService.getAllMainTool();
         model.addAttribute("dataList", dataList);
         return "home";
@@ -46,10 +49,12 @@ public class ToolController {
 
         User user = homeService.getUser(principal.getName());
         if (user == null) {
+            logger.warn("Accès à la page de détails sans utilisateur connecté.");
             return "redirect:/login";
         }
 
         Tool data = toolService.getTool(id);
+        logger.info("Chargement de la page de détails pour l'outil ID: {}", id);
         model.addAttribute("data", data);
         model.addAttribute("comments", feedbackService.getComments(id));
         model.addAttribute("isAdmin", user.getRole().equals("admin"));
@@ -61,6 +66,7 @@ public class ToolController {
     public String updateDataById(@PathVariable int id, Model model, Principal principal) {
         User user = homeService.getUser(principal.getName());
         if (!user.getRole().equals("admin")) {
+            logger.error("Tentative de modification d'un outil par un utilisateur non autorisé.");
             throw new UnauthorizedActionException("You are not allowed to update this tool");
         }
         Tool data = toolService.getTool(id);
@@ -73,11 +79,12 @@ public class ToolController {
     public String updateData(@PathVariable int id, @ModelAttribute Tool dataObj, Principal principal) {
         User user = homeService.getUser(principal.getName());
         if (!user.getRole().equals("admin")) {
+            logger.error("Tentative de modification d'un outil par un utilisateur non autorisé.");
             throw new UnauthorizedActionException("You are not allowed to update this tool");
         }
         dataObj.setId(id);
         toolService.updateTool(dataObj);
-
+        logger.info("Modification de l'outil ID: {} effectuée", id);
         return "redirect:/details/" + id;
     }
 
@@ -85,10 +92,11 @@ public class ToolController {
     public String deleteDataById(@PathVariable int id, Principal principal) {
         User user = homeService.getUser(principal.getName());
         if (!user.getRole().equals("admin")) {
+            logger.error("Tentative de suppression d'un outil par un utilisateur non autorisé.");
             throw new UnauthorizedActionException("You are not allowed to update this tool");
         }
         toolService.deleteTool(id);
-
+        logger.info("Suppression de l'outil ID: {} effectuée", id);
         return "redirect:/mainData";
     }
 
@@ -96,6 +104,7 @@ public class ToolController {
     public String addElementPage(Model model, Principal principal){
         User user = homeService.getUser(principal.getName());
         if (!user.getRole().equals("admin")) {
+            logger.error("Tentative d'ajout d'un outil par un utilisateur non autorisé.");
             throw new UnauthorizedActionException("You are not allowed to update this tool");
         }
         Tool tool = new Tool();
@@ -104,9 +113,14 @@ public class ToolController {
     }
 
     @PostMapping("/submissionAddElement")
-    public String addElement(@ModelAttribute("newTool") Tool tool){
+    public String addElement(@ModelAttribute("newTool") Tool tool, Principal principal){
+        User user = homeService.getUser(principal.getName());
+        if (!user.getRole().equals("admin")) {
+            logger.error("Tentative d'ajout d'un outil par un utilisateur non autorisé.");
+            throw new UnauthorizedActionException("You are not allowed to update this tool");
+        }
         toolService.addTool(tool);
-
+        logger.info("Ajout d'un nouvel outil effectué");
         return "redirect:/home";
     }
 }
