@@ -35,7 +35,7 @@ public class HopeController {
 
     @GetMapping("/details/{id}")
     public String getDataById(@PathVariable int id, Model model) {
-        Optional<Tool> data = hopeService.getData(id);
+        Optional<Tool> data = hopeService.getTool(id);
         if (data.isPresent()) {
             Tool dataObj = data.get();
             model.addAttribute("data", dataObj);
@@ -46,9 +46,9 @@ public class HopeController {
 
     @GetMapping("/update/{id}")
     public String updateDataById(@PathVariable int id, Model model) {
-        Optional<DataHope> data = hopeService.getData(id);
+        Optional<Tool> data = hopeService.getTool(id);
         if (data.isPresent()) {
-            DataHope dataObj = data.get();
+            Tool dataObj = data.get();
             model.addAttribute("data", dataObj);
         }
 
@@ -56,16 +56,16 @@ public class HopeController {
     }
 
     @PostMapping("/updateData/{id}")
-    public String updateData(@PathVariable int id, @ModelAttribute DataHope dataObj) {
+    public String updateData(@PathVariable int id, @ModelAttribute Tool dataObj) {
         dataObj.setId(id);
-        hopeService.updateData(dataObj);
+        hopeService.updateTool(dataObj);
 
         return "redirect:/details/" + id;
     }
 
     @GetMapping("/delete/{id}")
     public String deleteDataById(@PathVariable int id) {
-        hopeService.deleteData(id);
+        hopeService.deleteTool(id);
 
         return "redirect:/mainData";
     }

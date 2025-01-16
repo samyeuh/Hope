@@ -22,9 +22,9 @@ public class HopeService {
         return toolRepository.findAll();
     }
 
-    public Optional<DataHope> getData(int id){ return dataRepository.findById(id); }
+    public Optional<Tool> getTool(int id){ return toolRepository.findById(id); }
 
-    public void deleteData(int id){ dataRepository.deleteById(id); }
+    public void deleteTool(int id){ toolRepository.deleteById(id); }
 
-    public void updateData(DataHope data){ dataRepository.save(data); }
+    public void updateTool(Tool data){ toolRepository.save(data); }
 }
