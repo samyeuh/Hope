@@ -9,6 +9,17 @@
 </head>
 <body class="bg-light">
 <div class="container py-5">
+    <div class="d-flex align-items-center justify-content-between p-3 my-4 bg-light shadow-sm rounded">
+        <h4 class="mb-0"><span th:text="${username}">Utilisateur</span></h4>
+        <div class="d-flex">
+            <form class="me-2" th:action="@{/home}" method="get">
+                <button type="submit" class="btn btn-outline-info">Accueil</button>
+            </form>
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="btn btn-outline-danger">Se déconnecter</button>
+            </form>
+        </div>
+    </div>
     <div class="card shadow-sm">
         <div class="card-header bg-primary text-white">
             <h2 class="card-title mb-0">Ajouter un outil</h2>

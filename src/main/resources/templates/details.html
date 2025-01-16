@@ -9,13 +9,17 @@
 </head>
 <body class="bg-light">
 <div class="container py-5">
-    <!-- Bouton pour retourner sur la page d'accueil -->
-    <div class="mb-4">
-        <a href="/home" class="btn btn-secondary">
-            <i class="bi bi-house-door"></i> Retour à l'accueil
-        </a>
+    <div class="d-flex align-items-center justify-content-between p-3 my-4 bg-light shadow-sm rounded">
+        <h4 class="mb-0"><span th:text="${username}">Utilisateur</span></h4>
+        <div class="d-flex">
+            <form class="me-2" th:action="@{/home}" method="get">
+                <button type="submit" class="btn btn-outline-info">Accueil</button>
+            </form>
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="btn btn-outline-danger">Se déconnecter</button>
+            </form>
+        </div>
     </div>
-
     <div class="card shadow-sm mb-4">
         <div class="card-header bg-primary text-white">
             <h2 class="card-title mb-0" th:text="${data.titre}">Titre</h2>

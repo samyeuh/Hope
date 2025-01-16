@@ -45,8 +45,7 @@ HOPE est une application web visant à remplacer un fichier Excel existant pour 
 
 - **Validation des entrées** : Par exemple, dans `LoginService`, les entrées utilisateur sont validées pour éviter les erreurs courantes.
 - **Gestion des exceptions** : Dans `UDService`, une exception `UsernameNotFoundException` est levée avec un message clair si un utilisateur n'est pas trouvé.
-
-**Amélioration possible** : Utiliser des objets `Optional` pour éviter les retours `null` et ajouter des messages d’erreur personnalisés dans les logs.
+- **Gestion des données inexistantes** : Utilisation d'objets `Optional` pour éviter les retours `null`
 
 ### Principes SOLID
 
@@ -54,10 +53,10 @@ HOPE est une application web visant à remplacer un fichier Excel existant pour 
    - Chaque classe a une seule responsabilité bien définie (ex. `LoginService` pour l'authentification, `HomeService` pour la gestion des données de la page d'accueil).
 
 2. **Open/Closed Principle (OCP)**
-   - Favorise l’extensibilité sans modification du code existant (ex. utilisation de `JpaRepository`).
+   - Favorise l’extensibilité sans modification du code existant (ex. utilisation de `JpaRepository`). La classe est étendue sans jamais être réécrite.
 
 3. **Liskov Substitution Principle (LSP)**
-   - Les services implémentant `JpaRepository` respectent les contrats des interfaces.
+   - Les services implémentant `JpaRepository` respectent les contrats des interfaces. On peut donc remplacer la classe mêre par une classe fille.
 
 4. **Interface Segregation Principle (ISP)**
    - Interfaces spécifiques et bien séparées (ex. `UserRepository` et `DataRepository`).
