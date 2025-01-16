@@ -44,6 +44,20 @@ public class HopeController {
         return "details";
     }
 
+
+    @GetMapping("/addElement")
+    public String addElementPage(Model model){
+        DataHope dataHope = new DataHope();
+        model.addAttribute("newDataHope", dataHope);
+        return "addElement";
+    }
+
+    @PostMapping("/submissionAddElement")
+    public String addElement(@ModelAttribute("newDataHope") DataHope dataHope){
+        hopeService.addElement(dataHope);
+
+        return "redirect:/home";
+    }
     @GetMapping("/update/{id}")
     public String updateDataById(@PathVariable int id, Model model) {
         Optional<DataHope> data = hopeService.getData(id);

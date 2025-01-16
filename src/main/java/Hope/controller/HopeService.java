@@ -34,4 +34,7 @@ public class HopeService {
 
         dataRepository.save(data);
     }
+    public void addElement(DataHope dataHope){
+        dataRepository.save(dataHope);
+    }
 }

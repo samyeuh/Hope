@@ -11,10 +11,10 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User,Integer> {
 
-    @Query(value = "SELECT * FROM hopeDB.User WHERE username = :username", nativeQuery = true)
+    @Query(value = "SELECT * FROM user WHERE username = :username", nativeQuery = true)
     Optional<User> findUserByUsername(@Param("username") String username);
 
     @Modifying
-    @Query(value = "INSERT INTO hopeDB.User (username, first_name, last_name, role, password) VALUES (:username, :firstName, :lastName, 'Etudiant', :password)", nativeQuery = true)
+    @Query(value = "INSERT INTO user (username, first_name, last_name, role, password) VALUES (:username, :firstName, :lastName, 'Etudiant', :password)", nativeQuery = true)
     void insertUser(@Param("username") String username, @Param("password") String password, @Param("firstName") String firstName, @Param("lastName") String lastName);
 }
