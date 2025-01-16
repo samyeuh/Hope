@@ -17,6 +17,10 @@ import java.time.format.DateTimeFormatter;
         @NamedQuery(
                 name = "Feedback.findAllByToolId",
                 query = "SELECT f FROM Feedback f WHERE f.tool.id = :toolId"
+        ),
+        @NamedQuery(
+                name = "Feedback.hasCommented",
+                query = "SELECT f FROM Feedback f WHERE f.user.id = :userId AND f.tool.id = :toolId"
         )
 })
 public class Feedback {

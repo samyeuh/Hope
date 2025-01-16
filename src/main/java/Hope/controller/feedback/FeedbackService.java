@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FeedbackService {
@@ -37,5 +38,11 @@ public class FeedbackService {
     public List<Feedback> getComments(int id) {
         logger.info("Récupération des commentaires pour l'outil ID: {}", id);
         return feedbackRepository.findAllByToolId(id).orElseThrow(() -> new ResourceNotFoundException("Feedback", "tool_id", id));
+    }
+
+    public boolean hasCommented(int id, User user){
+        logger.info("Vérification si l'utilisateur '{}' a déjà commenté l'outil ID: {}", user.getUsername(), id);
+        Optional<Feedback> f = feedbackRepository.hasCommented(user.getId(), id);
+        return f.isPresent();
     }
 }

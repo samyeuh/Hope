@@ -59,7 +59,7 @@
             <h4 class="mb-0">Commentaires</h4>
         </div>
         <div class="card-body">
-            <form th:action="@{/addComment/{idData}(idData=${data.id})}" method="post" class="mb-4">
+            <form th:action="@{/addComment/{idData}(idData=${data.id})}" th:if="${!hasCommented}" method="post" class="mb-4">
                 <div class="mb-3">
                     <label for="comment" class="form-label">Ajouter un commentaire</label>
                     <textarea id="comment" name="comment" class="form-control" rows="3" placeholder="Saisissez votre commentaire ici..." required></textarea>

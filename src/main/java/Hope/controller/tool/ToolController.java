@@ -52,7 +52,9 @@ public class ToolController {
         }
 
         Tool data = toolService.getTool(id);
+        boolean hasCommented = feedbackService.hasCommented(id, user);
         logger.info("Chargement de la page de détails pour l'outil ID: {}", id);
+        model.addAttribute("hasCommented", hasCommented);
         model.addAttribute("data", data);
         model.addAttribute("comments", feedbackService.getComments(id));
         model.addAttribute("isAdmin", user.getRole().equals("admin"));
