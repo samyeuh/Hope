@@ -1,4 +1,4 @@
-package com.example.hope.exceptions;
+package Hope.exceptions;
 
 public abstract class BaseException extends RuntimeException {
     public BaseException(String message) {

@@ -1,4 +1,4 @@
-package com.example.hope.exceptions;
+package Hope.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
