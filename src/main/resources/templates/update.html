@@ -57,7 +57,7 @@
                     <button type="submit" class="btn btn-success">
                         <i class="bi bi-check-circle"></i> Enregistrer
                     </button>
-                    <a href="/" class="btn btn-secondary">
+                    <a th:href="@{/details/{idData}(idData=${data.id})}" class="btn btn-secondary">
                         <i class="bi bi-arrow-left-circle"></i> Annuler
                     </a>
                 </div>
