@@ -9,5 +9,7 @@ services:
     image: "mariadb:latest"
     ports:
       - "3306:3306"
+    volumes:
+      - "${bddPath}:/var/lib/mysql"
     environment:
       MARIADB_ROOT_PASSWORD: "superSecuredPassword"
