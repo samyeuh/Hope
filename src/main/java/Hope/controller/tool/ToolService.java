@@ -26,7 +26,12 @@ public class ToolService {
 
     public void deleteTool(int id){ toolRepository.deleteById(id); }
 
-    public void updateTool(Tool data){ toolRepository.save(data); }
+    public void updateTool(Tool data){
+        if (data.getDescriptionSimple().isEmpty()) {data.setDescriptionSimple(null);}
+        if (data.getDescriptionDetaillee().isEmpty()) {data.setDescriptionDetaillee(null);}
+        if (data.getAcces().isEmpty()) {data.setAcces(null);}
+
+        toolRepository.save(data); }
 
     public void addTool(Tool data){ toolRepository.save(data); }
 }

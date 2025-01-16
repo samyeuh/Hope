@@ -16,15 +16,15 @@
         <div class="card-body">
             <form th:action="@{/updateData/{idData}(idData=${data.id})}" method="post">
                 <div class="mb-3">
-                    <label for="titre" class="form-label">Titre</label>
+                    <label for="titre" class="form-label">Titre *</label>
                     <input type="text" class="form-control" id="titre" name="titre" th:value="${data.titre}" required>
                 </div>
                 <div class="mb-3">
-                    <label for="domaine" class="form-label">Domaine</label>
+                    <label for="domaine" class="form-label">Domaine *</label>
                     <input type="text" class="form-control" id="domaine" name="domaine" th:value="${data.domaine}" required>
                 </div>
                 <div class="mb-3">
-                    <label for="lien" class="form-label">Lien</label>
+                    <label for="lien" class="form-label">Lien *</label>
                     <input type="url" class="form-control" id="lien" name="lien" th:value="${data.lien}" required>
                 </div>
                 <div class="mb-3">
