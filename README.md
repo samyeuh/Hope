@@ -89,7 +89,7 @@ L’application est accessible via une URL publique. Vous pouvez tester toutes s
    ```bash
    ./mvnw spring-boot:run
    ```
-2. Accédez à l’application via [http://localhost:8080](http://localhost:8080).
+2. Accédez à l’application via [http://localhost:8080](https://hope.flyingbush.dev/).
 
 ### Comptes de test
 - **Administrateur**:
