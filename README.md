@@ -1,8 +1,23 @@
-# HOPE: Hub des Outils et Plateformes pour les Enseignements
+# HOPE : Hub des Outils et Plateformes pour les Enseignements
 
 ## Introduction
 
 HOPE est une application web visant à remplacer un fichier Excel existant pour homogénéiser l’utilisation des outils et plateformes pédagogiques. Cette solution fournit une interface intuitive pour les enseignants, étudiants et administrateurs, tout en facilitant la gestion et le partage d’informations éducatives.
+
+## Sommaire
+
+1. [Fonctionnalités Principales](#fonctionnalités-principales)
+2. [Réponses aux questions](#réponses-aux-questions)
+3. [Déploiement](#déploiement-en-ligne)
+4. [Instructions pour exécuter l'application localement](#instructions-pour-exécuter-lapplication-localement)
+5. [Comptes de test](#comptes-de-test)
+6. [Technologies Utilisées](#technologies-utilisées)
+7. [Documentation API](#documentation-api)
+8. [Auteurs](#auteurs)
+9. [Licence](#licence)
+10. [Conformité avec l’approche Clean Code](#conformité-avec-lapproche-clean-code)
+11. [Conformité aux principes SOLID](#conformité-aux-principes-solid)
+
 
 ## Fonctionnalités Principales
 
@@ -63,12 +78,14 @@ HOPE est une application web visant à remplacer un fichier Excel existant pour 
 
 **Amélioration possible** : Modulariser la configuration de sécurité dans `SecurityConfig`.
 
-## Déploiement
+## Déploiement en ligne
 
-L’application est accessible via une URL publique. Vous pouvez tester toutes ses fonctionnalités en utilisant les comptes ci-dessous.
+L’application est accessible via une URL publique : [hope.flyingbush.dev](https://hope.flyingbush.dev). Vous pouvez tester toutes ses fonctionnalités en utilisant les comptes plus bas.
+
+L'application est hébergée sur un serveur personnel. L'outil Docker Compose nous permet de déployer l'application en une seule commande. C'est un outil très puissant, surtout dans un usage personnel et à petite échelle.
 
 
-## Instructions pour exécuter l'application
+## Instructions pour exécuter l'application localement
 
 ### Installation
 1. Clonez le dépôt :
@@ -83,42 +100,34 @@ L’application est accessible via une URL publique. Vous pouvez tester toutes s
    ```bash
    mysql -u root -p <hope_schema.sql>
    ```
+4. Configurez les paramètres de connexion à la base de données dans `src/main/resources/application.properties`.
 
 ### Lancement
 1. Compilez et lancez le projet avec Maven :
    ```bash
    ./mvnw spring-boot:run
    ```
-2. Accédez à l’application via [http://localhost:8080](https://hope.flyingbush.dev/).
+2. Accédez à l’application via [http://localhost:8080](http://localhost:8080).
 
-### Comptes de test
-- **Administrateur**:
-    - Login: `admin1fake`
+## Comptes de test
+- **Administrateur** :
+    - Login: `admin1`
     - Mot de passe: `password123`
-- **Enseignant**:
-    - Login: `enseignant1fake`
+- **Enseignant** :
+    - Login: `enseignant1`
     - Mot de passe: `password123`
-- **Étudiant**:
-    - Login: `etudiant1fake`
+- **Étudiant** :
+    - Login: `etudiant1`
     - Mot de passe: `password123`
-      
-INSERT INTO user (username, first_name, last_name, role, password)
-VALUES
-    ('admin1fake', 'Alice', 'Admin', 'admin', 'password123'),
-    ('etudiant1fake', 'Bob', 'Etudiant', 'étudiant', 'password123'),
-    ('etudiant2fake', 'Claire', 'Etudiant', 'étudiant', 'password123'),
-    ('enseignant1fake', 'David', 'Enseignant', 'enseignant', 'password123'),
-    ('enseignant2fake', 'Eve', 'Enseignant', 'enseignant', 'password123'),
-
 
 
 ## Technologies Utilisées
 - **Java** : JDK 17 ou supérieur
 - **Framework** : Spring Boot 3.0
-- **Frontend**: Thymeleaf(aspect dynamique) + HTML(structure page) + CSS(style)
-- **Sécurité**: Thymeleaf + Spring Security avec gestion des rôles et des permissions
+- **Frontend** : Thymeleaf(aspect dynamique) + HTML(structure page) + CSS(style)
+- **Sécurité** : Thymeleaf + Spring Security avec gestion des rôles et des permissions
 - **Documentation API**: Swagger UI
-- **Suivi des erreurs**: SLF4J
+- **Suivi des erreurs** : SLF4J
 - **SGBD** : MariaDB 11.6.2
 - **Gestion de version** : Git (repos sur GitHub/GitLab)
 - **Outils supplémentaires** : Swagger pour la documentation de l'API REST
@@ -126,9 +135,6 @@ VALUES
 
 ## Documentation API
 La documentation complète de l’API REST est accessible via : [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html).
-
-## Contributions
-Les suggestions et rapports de bugs sont les bienvenus. Veuillez créer une *issue* sur le dépôt Git.
 
 ## Auteurs
 Projet développé par **[groupe 4]**, dans le cadre du module ALTN72 - Développement Full Stack en Java.
@@ -200,7 +206,7 @@ Le projet HOPE a été conçu en appliquant les principes SOLID lorsque cela ét
   }
 
   public class HomeController {
-      // Gestion des endpoints liés à la page d'accueille.
+      // Gestion des endpoints liés à la page d'accueil.
   }
   ```
   **Pertinence** : Respecté pour garantir la maintenabilité et limiter le couplage entre les modules.
@@ -244,5 +250,7 @@ Le projet HOPE a été conçu en appliquant les principes SOLID lorsque cela ét
     public SignUpController(SignUpService signUpService) {
         this.signUpService = signUpService;
     }
+    //...
+  }
   ```
   **Pertinence** : Respecté en injectant les dépendances via le constructeur (Spring gère ces injections via @Autowired).
