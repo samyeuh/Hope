@@ -194,7 +194,7 @@ Le projet HOPE a été conçu en appliquant les principes SOLID lorsque cela ét
 ### 1. Single Responsibility Principle (SRP)
 - Chaque classe remplit une seule responsabilité clairement définie.
   Exemple :
-*  ```java
+  ```java
   public class HomeService {
       // Gestion des opérations sur la page d'accueil, tel que la recherche d'information pour retrouver un élément.
   }
@@ -234,8 +234,8 @@ Le projet HOPE a été conçu en appliquant les principes SOLID lorsque cela ét
 - Les modules de haut niveau ne dépendent pas des modules de bas niveau, mais d’abstractions.
   Exemple :
   ```java
-@Controller
-public class SignUpController {
+  @Controller
+  public class SignUpController {
 
     private final SignUpService signUpService;
     private static final Logger logger = LoggerFactory.getLogger(SignUpController.class);
