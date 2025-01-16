@@ -21,7 +21,7 @@
 
     <!-- Barre de recherche -->
     <div class="search-bar">
-        <a th:href="@{/addElement}" class="btn btn-primary" sec:authorize="hasRole('Admin')">
+        <a th:href="@{/addElement}" class="btn btn-primary" sec:authorize="hasRole('admin')">
             Ajouter un élément
         </a>
         <form th:action="@{/search}" method="get">
