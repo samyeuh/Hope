@@ -6,16 +6,18 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface ToolRepository extends JpaRepository<Tool,Integer> {
 
 
-    @Query(value = "SELECT * FROM tool d WHERE " +
-            "LOWER(Titre) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
+    @Query(value = "SELECT * FROM tool d WHERE Visible = 1 AND" +
+            "(LOWER(Titre) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
             "LOWER(Domaine) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
-            "LOWER(Description_simple) LIKE LOWER(CONCAT('%', :query, '%'))", nativeQuery = true)
+            "LOWER(Description_simple) LIKE LOWER(CONCAT('%', :query, '%')))", nativeQuery = true)
     List<Tool> search(@Param("query") String query);
+
+    @Query(value = "SELECT * FROM tool WHERE VISIBLE = ?", nativeQuery = true)
+    List<Tool> findAllByVisible(boolean visible);
 
 }

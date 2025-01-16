@@ -17,7 +17,11 @@ public class ToolService {
     }
 
     public List<Tool> getAllMainTool(){
-        return toolRepository.findAll();
+        return toolRepository.findAllByVisible(true);
+    }
+
+    public List<Tool> getProposalTool(){
+        return toolRepository.findAllByVisible(false);
     }
 
     public Tool getTool(int id) {

@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="fr" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
@@ -18,7 +17,6 @@
         </form>
     </div>
 
-
     <div class="search-bar">
         <a th:href="@{/addElement}" class="btn btn-primary" sec:authorize="hasRole('admin')">
             Ajouter un élément
@@ -29,6 +27,40 @@
         </form>
     </div>
 
+    <div class="proposals-section mt-5">
+        <div sec:authorize="hasRole('admin')">
+            <h2 class="text-center mb-4">Propositions d'ajout</h2>
+            <div th:if="${proposalList.size() == 0}" class="text-center">
+                <p>Aucune proposition trouvée.</p>
+            </div>
+            <div class="row g-4" th:if="${proposalList.size() > 0}">
+                <div class="col-md-4" th:each="proposal : ${proposalList}">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${proposal.titre}">Titre</h5>
+                            <h6 class="card-subtitle mb-2 text-muted" th:text="${proposal.domaine}">Domaine</h6>
+                            <p class="card-text" th:text="${proposal.descriptionSimple}">Description</p>
+                            <form th:action="@{/approveProposal/{idProposal}(idProposal=${proposal.id})}" method="post" class="d-inline">
+                                <button type="submit" class="btn btn-success btn-sm">Approuver</button>
+                            </form>
+                            <form th:action="@{/delete/{idProposal}(idProposal=${proposal.id})}" method="post" class="d-inline">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                <button type="submit" class="btn btn-danger btn-sm">Rejeter</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div sec:authorize="hasRole('enseignant')">
+            <div class="text-center">
+                <a th:href="@{/proposeAdd}" class="btn btn-success">
+                    Proposer un ajout
+                </a>
+            </div>
+        </div>
+    </div>
 
     <div class="data-list mt-5">
         <h2 class="text-center mb-4" th:text="${#strings.isEmpty(query) ? 'Données Disponibles' : 'Résultats pour ' + query }">Données Disponibles</h2>

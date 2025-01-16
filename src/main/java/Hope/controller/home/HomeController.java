@@ -1,5 +1,6 @@
 package Hope.controller.home;
 
+import Hope.controller.tool.ToolService;
 import Hope.model.Tool;
 import Hope.model.User;
 import org.slf4j.Logger;
@@ -17,10 +18,12 @@ public class HomeController {
 
     private final HomeService homeService;
     private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+    private final ToolService toolService;
 
 
-    public HomeController(HomeService homeService) {
+    public HomeController(HomeService homeService, ToolService toolService) {
         this.homeService = homeService;
+        this.toolService = toolService;
     }
 
     @RequestMapping("/home")
@@ -35,9 +38,10 @@ public class HomeController {
         }
 
         List<Tool> dataList = homeService.getPreviewsData();
+        List<Tool> proposalList = toolService.getProposalTool();
         logger.info("Chargement des outils : {} outils récupérés", dataList.size());
         model.addAttribute("dataList", dataList);
-
+        model.addAttribute("proposalList", proposalList);
         return "home";
     }
 

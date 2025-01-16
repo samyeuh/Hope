@@ -97,7 +97,7 @@ public class ToolController {
         }
         toolService.deleteTool(id);
         logger.info("Suppression de l'outil ID: {} effectuée", id);
-        return "redirect:/mainData";
+        return "redirect:/home";
     }
 
     @GetMapping("/addElement")
@@ -113,15 +113,39 @@ public class ToolController {
         return "addElement";
     }
 
+    @GetMapping("/proposeAdd")
+    public String proposeAddPage(Model model, Principal principal){
+        User user = homeService.getUser(principal.getName());
+        Tool tool = new Tool();
+        model.addAttribute("newTool", tool);
+        model.addAttribute("username", user.getFirstName() + " " + user.getLastName());
+        return "addElement";
+    }
+
     @PostMapping("/submissionAddElement")
     public String addElement(@ModelAttribute("newTool") Tool tool, Principal principal){
         User user = homeService.getUser(principal.getName());
-        if (!user.getRole().equals("admin")) {
+        if (user.getRole().equals("etudiant")) {
             logger.error("Tentative d'ajout d'un outil par un utilisateur non autorisé.");
             throw new UnauthorizedActionException("You are not allowed to update this tool");
         }
+        tool.setVisible(user.getRole().equals("admin"));
         toolService.addTool(tool);
         logger.info("Ajout d'un nouvel outil effectué");
+        return "redirect:/home";
+    }
+
+    @PostMapping("/approveProposal/{id}")
+    public String approveProposal(@PathVariable int id, Principal principal){
+        User user = homeService.getUser(principal.getName());
+        if (!user.getRole().equals("admin")) {
+            logger.error("Tentative d'approbation d'une proposition par un utilisateur non autorisé.");
+            throw new UnauthorizedActionException("You are not allowed to update this tool");
+        }
+        Tool tool = toolService.getTool(id);
+        tool.setVisible(true);
+        toolService.updateTool(tool);
+        logger.info("Approbation de la proposition ID: {} effectuée", id);
         return "redirect:/home";
     }
 }

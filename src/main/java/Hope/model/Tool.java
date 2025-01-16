@@ -1,9 +1,10 @@
 package Hope.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
-@Table(name = "tool")
+@Table(name = "tool", schema = "hope")
 public class Tool {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +32,10 @@ public class Tool {
     @Lob
     @Column(name = "Acces")
     private String acces;
+
+    @ColumnDefault("1")
+    @Column(name = "VISIBLE")
+    private Boolean visible;
 
     public Integer getId() {
         return id;
@@ -86,6 +91,14 @@ public class Tool {
 
     public void setAcces(String acces) {
         this.acces = acces;
+    }
+
+    public Boolean getVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
     }
 
 }

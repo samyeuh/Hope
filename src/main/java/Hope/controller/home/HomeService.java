@@ -5,7 +5,6 @@ import Hope.model.Tool;
 import Hope.model.ToolRepository;
 import Hope.model.User;
 import Hope.model.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,7 +25,7 @@ public class HomeService {
     }
 
     public List<Tool> getPreviewsData() {
-        return toolRepository.findAll();
+        return toolRepository.findAllByVisible(true);
     }
 
     public List<Tool> searchData(String query) {
