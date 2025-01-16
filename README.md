@@ -93,14 +93,24 @@ L’application est accessible via une URL publique. Vous pouvez tester toutes s
 
 ### Comptes de test
 - **Administrateur**:
-    - Login: `admin@hope.edu`
-    - Mot de passe: `admin123`
+    - Login: `admin1fake`
+    - Mot de passe: `password123`
 - **Enseignant**:
-    - Login: `teacher@hope.edu`
-    - Mot de passe: `teacher123`
+    - Login: `enseignant1fake`
+    - Mot de passe: `password123`
 - **Étudiant**:
-    - Login: `student@hope.edu`
-    - Mot de passe: `student123`
+    - Login: `etudiant1fake`
+    - Mot de passe: `password123`
+      
+INSERT INTO user (username, first_name, last_name, role, password)
+VALUES
+    ('admin1fake', 'Alice', 'Admin', 'admin', 'password123'),
+    ('etudiant1fake', 'Bob', 'Etudiant', 'étudiant', 'password123'),
+    ('etudiant2fake', 'Claire', 'Etudiant', 'étudiant', 'password123'),
+    ('enseignant1fake', 'David', 'Enseignant', 'enseignant', 'password123'),
+    ('enseignant2fake', 'Eve', 'Enseignant', 'enseignant', 'password123'),
+
+
 
 ## Technologies Utilisées
 - **Java** : JDK 17 ou supérieur
