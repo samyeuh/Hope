@@ -10,7 +10,6 @@
 </head>
 <body>
 <div class="container">
-    <!-- Card de bienvenue -->
     <div class="welcome-card">
         <h1>Bonjour, <span th:text="${username}">Utilisateur</span> !</h1>
         <p>Bienvenue sur votre espace personnel. Recherchez vos données ou explorez les données disponibles.</p>
@@ -19,7 +18,7 @@
         </form>
     </div>
 
-    <!-- Barre de recherche -->
+
     <div class="search-bar">
         <a th:href="@{/addElement}" class="btn btn-primary" sec:authorize="hasRole('admin')">
             Ajouter un élément
@@ -30,7 +29,7 @@
         </form>
     </div>
 
-    <!-- Liste des données -->
+
     <div class="data-list mt-5">
         <h2 class="text-center mb-4" th:text="${#strings.isEmpty(query) ? 'Données Disponibles' : 'Résultats pour ' + query }">Données Disponibles</h2>
         <div th:if="${dataList.size() == 0}" class="text-center">

@@ -27,15 +27,11 @@ public class LoginService {
             return false;
         }
 
-        System.out.println("processLogin Service: " + username);
        Optional<User> users = userRepository.findUserByUsername(username);
         if (users.isEmpty()){
-            System.out.println("No user found with username: " + username);
             return false;
         }
         User user = users.get();
         return passwordEncoder.matches(password, user.getPassword());
-        // return user.getPassword().equals(password);
-
     }
 }
