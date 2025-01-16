@@ -30,7 +30,6 @@ public class ToolController {
 
     @GetMapping("/")
     public String index() {
-        // TODO: verifier si l'utilisateur est connecté
         return "redirect:/login";
     }
 
