@@ -30,10 +30,10 @@
     <div class="proposals-section mt-5">
         <div sec:authorize="hasRole('admin')">
             <h2 class="text-center mb-4">Propositions d'ajout d'outils</h2>
-            <div th:if="${proposalList.size() == 0}" class="text-center">
+            <div th:if="${proposalList == null}" class="text-center">
                 <p>Aucune proposition trouvée.</p>
             </div>
-            <div class="row g-4" th:if="${proposalList.size() > 0}">
+            <div class="row g-4" th:if="${proposalList != null}">
                 <div class="col-md-4" th:each="proposal : ${proposalList}">
                     <div class="card shadow-sm h-100">
                         <div class="card-body">
@@ -64,10 +64,10 @@
 
     <div class="data-list mt-5">
         <h2 class="text-center mb-4" th:text="${#strings.isEmpty(query) ? 'Outils disponibles' : 'Résultats pour ' + query }">Outils Disponibles</h2>
-        <div th:if="${dataList.size() == 0}" class="text-center">
+        <div th:if="${dataList == null}" class="text-center">
             <p>Aucun outils trouvés.</p>
         </div>
-        <div class="row g-4" th:if="${dataList.size() > 0}">
+        <div class="row g-4" th:if="${dataList != null}">
             <div class="col-md-4" th:each="data : ${dataList}">
                 <div class="card shadow-sm h-100">
                     <div class="card-body">

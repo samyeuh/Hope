@@ -5,7 +5,10 @@ import Hope.model.Tool;
 import Hope.model.ToolRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ToolService {
@@ -17,11 +20,11 @@ public class ToolService {
     }
 
     public List<Tool> getAllMainTool(){
-        return toolRepository.findAllByVisible(true);
+        return toolRepository.findAllByVisible(true).orElse(null);
     }
 
     public List<Tool> getProposalTool(){
-        return toolRepository.findAllByVisible(false);
+        return toolRepository.findAllByVisible(false).orElse(null);
     }
 
     public Tool getTool(int id) {

@@ -6,12 +6,13 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ToolRepository extends JpaRepository<Tool,Integer> {
     List<Tool> search(@Param("query") String query);
 
     @Query(value = "SELECT * FROM tool WHERE VISIBLE = ?", nativeQuery = true)
-    List<Tool> findAllByVisible(boolean visible);
+    Optional<List<Tool>> findAllByVisible(boolean visible);
 
 }
