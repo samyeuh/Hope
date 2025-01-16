@@ -14,18 +14,22 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login", "/login-error", "/signUp", "/style/*").permitAll()
+                        .requestMatchers("/login", "/signUp", "/style/*").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/do-login")
                         .defaultSuccessUrl("/home", true)
-                        .failureUrl("/login-error")
+                        .failureUrl("/login?loginError=true")
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/login")
+                ).sessionManagement(session -> session
+                        .invalidSessionUrl("/login?sessionExpired=true")
+                        .maximumSessions(1)
+                        .maxSessionsPreventsLogin(false)
                 );
         return http.build();
     }

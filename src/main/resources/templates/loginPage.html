@@ -1,26 +1,45 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <title>Login Page</title>
-        <link rel="stylesheet" th:href="@{/style/loginPage.css}">
-    </head>
-    <body>
-        <div class="login-container">
-            <div class="login-card">
-                <h1>Re-bonjour</h1>
-                <div class="logo">A</div>
-                <form th:action="@{/do-login}" method="post" class="login-form">
-                    <label for="username">Nom d'utilisateur</label>
-                    <input id="username" name="username" placeholder="Nom d'utilisateur">
-                    <label for="password">Mot de passe</label>
-                    <input id="password" name="password" placeholder="Entrez votre mot de passe" required type="password">
-                    <span class="show-password">&#128065;</span>
-                    <button class="login-button" type="submit">SE CONNECTER</button>
-                </form>
-                <p class="signup-text">Vous n'avez pas de compte ? <a href="/signUp">Créer un compte</a></p>
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Login Page</title>
+    <link rel="stylesheet" th:href="@{/style/loginPage.css}">
+</head>
+<body>
+<div class="login-container">
+    <div class="login-card">
+        <h1>Re-bonjour</h1>
+        <div class="logo">A</div>
+        <form th:action="@{/do-login}" method="post" class="login-form">
+            <div th:if="${loginError}" class="error-message">
+                Nom d'utilisateur ou mot de passe incorrect.
             </div>
-        </div>
-    </body>
+            <div th:if="${sessionExpired}" class="error-message">
+                Votre session a expiré. Veuillez vous reconnecter.
+            </div>
+
+            <label for="username">Nom d'utilisateur</label>
+            <input id="username" name="username" placeholder="Nom d'utilisateur" required>
+
+            <label for="password">Mot de passe</label>
+            <input id="password" name="password" placeholder="Entrez votre mot de passe" required type="password">
+
+            <span class="show-password">&#128065;</span>
+
+            <button class="login-button" type="submit">SE CONNECTER</button>
+        </form>
+        <p class="signup-text">Vous n'avez pas de compte ? <a href="/signUp">Créer un compte</a></p>
+    </div>
+</div>
+
+<style>
+    .error-message {
+        color: red;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+</style>
+</body>
 </html>

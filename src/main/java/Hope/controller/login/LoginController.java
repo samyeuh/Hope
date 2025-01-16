@@ -18,15 +18,20 @@ public class LoginController {
     }
 
     @RequestMapping("/login")
-    public String login() {
+    public String login(
+            @RequestParam(value = "loginError", required = false) String loginError,
+            @RequestParam(value = "sessionExpired", required = false) String sessionExpired,
+            Model model
+    ) {
+        if (loginError != null) {
+            model.addAttribute("loginError", true);
+        }
+        if (sessionExpired != null) {
+            model.addAttribute("sessionExpired", true);
+        }
         return "loginPage";
     }
 
-    @RequestMapping("/login-error")
-    public String loginError(Model model) {
-        model.addAttribute("loginError", true);
-        return "loginPage";
-    }
 
     @PostMapping("/do-login")
     public String processLogin(
@@ -34,15 +39,11 @@ public class LoginController {
             @RequestParam("password") String password,
             Model model
     ) {
-        System.out.println("processLogin Controller: " + username);
         if (loginService.login(username, password)) {
-            System.out.println("Login successful.");
             return "redirect:/home";
         } else {
-            System.out.println("Login failed.");
             model.addAttribute("loginError", true);
             return "loginPage";
         }
-
     }
 }
