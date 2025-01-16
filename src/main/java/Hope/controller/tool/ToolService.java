@@ -3,7 +3,6 @@ package Hope.controller.tool;
 import Hope.exceptions.ResourceNotFoundException;
 import Hope.model.Tool;
 import Hope.model.ToolRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
