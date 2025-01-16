@@ -1,5 +1,8 @@
 package Hope.controller.signup;
 
+import Hope.exceptions.InvalidInputException;
+import Hope.exceptions.ResourceNotFoundException;
+import Hope.exceptions.UserAlreadyExistsException;
 import Hope.model.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -24,26 +27,19 @@ public class SignUpService {
                 password == null || password.isEmpty() ||
                 firstName == null || firstName.isEmpty() ||
                 lastName == null || lastName.isEmpty()) {
-            System.out.println("Invalid input provided.");
-            return false;
+            throw new InvalidInputException("Invalid input provided.");
         }
 
         boolean userExists = userRepository.findUserByUsername(username).isPresent();
         if (userExists) {
-            System.out.println("User already exists with username: " + username);
-            return false;
+            throw new UserAlreadyExistsException("User already exists with username: " + username);
         }
 
         String encodedPassword = passwordEncoder.encode(password);
 
         userRepository.insertUser(username, encodedPassword, firstName, lastName);
-        boolean userInserted = userRepository.findUserByUsername(username).isPresent();
-
-        if (!userInserted) {
-            System.out.println("User not inserted with username: " + username);
-        }
-
-        return userInserted;
+        userRepository.findUserByUsername(username).orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
+        return true;
     }
 
 }

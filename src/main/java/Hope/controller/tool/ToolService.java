@@ -1,5 +1,6 @@
 package Hope.controller.tool;
 
+import Hope.exceptions.ResourceNotFoundException;
 import Hope.model.Tool;
 import Hope.model.ToolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,10 @@ public class ToolService {
         return toolRepository.findAll();
     }
 
-    public Optional<Tool> getTool(int id){ return toolRepository.findById(id); }
-
+    public Tool getTool(int id) {
+        return toolRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Tool", "id", id));
+    }
     public void deleteTool(int id){ toolRepository.deleteById(id); }
 
     public void updateTool(Tool data){

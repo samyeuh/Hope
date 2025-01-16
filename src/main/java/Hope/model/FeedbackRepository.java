@@ -5,12 +5,13 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface FeedbackRepository extends JpaRepository<Feedback,Long> {
 
 
     @Query(value = "SELECT * FROM feedback WHERE tool_id = ?", nativeQuery = true)
-    List<Feedback> findAllByToolId(int id);
+    Optional<List<Feedback>> findAllByToolId(int id);
 
     @Modifying
     @Query(value = "INSERT INTO feedback (user_id, tool_id, commentaire) VALUES (?, ?, ?)", nativeQuery = true)

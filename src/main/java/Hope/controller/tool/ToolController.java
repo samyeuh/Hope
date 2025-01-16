@@ -2,6 +2,7 @@ package Hope.controller.tool;
 
 import Hope.controller.feedback.FeedbackService;
 import Hope.controller.home.HomeService;
+import Hope.exceptions.UnauthorizedActionException;
 import Hope.model.Tool;
 import Hope.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,34 +43,38 @@ public class ToolController {
 
     @GetMapping("/details/{id}")
     public String getDataById(@PathVariable int id, Model model, Principal principal) {
-        Optional<Tool> data = toolService.getTool(id);
+
         User user = homeService.getUser(principal.getName());
         if (user == null) {
             return "redirect:/login";
         }
-        if (data.isPresent()) {
-            Tool dataObj = data.get();
-            model.addAttribute("data", dataObj);
-            model.addAttribute("comments", feedbackService.getComments(id));
-            model.addAttribute("isAdmin", user.getRole().equals("admin"));
-        }
+
+        Tool data = toolService.getTool(id);
+        model.addAttribute("data", data);
+        model.addAttribute("comments", feedbackService.getComments(id));
+        model.addAttribute("isAdmin", user.getRole().equals("admin"));
 
         return "details";
     }
 
     @GetMapping("/update/{id}")
-    public String updateDataById(@PathVariable int id, Model model) {
-        Optional<Tool> data = toolService.getTool(id);
-        if (data.isPresent()) {
-            Tool dataObj = data.get();
-            model.addAttribute("data", dataObj);
+    public String updateDataById(@PathVariable int id, Model model, Principal principal) {
+        User user = homeService.getUser(principal.getName());
+        if (!user.getRole().equals("admin")) {
+            throw new UnauthorizedActionException("You are not allowed to update this tool");
         }
+        Tool data = toolService.getTool(id);
+        model.addAttribute("data", data);
 
         return "update";
     }
 
     @PostMapping("/updateData/{id}")
-    public String updateData(@PathVariable int id, @ModelAttribute Tool dataObj) {
+    public String updateData(@PathVariable int id, @ModelAttribute Tool dataObj, Principal principal) {
+        User user = homeService.getUser(principal.getName());
+        if (!user.getRole().equals("admin")) {
+            throw new UnauthorizedActionException("You are not allowed to update this tool");
+        }
         dataObj.setId(id);
         toolService.updateTool(dataObj);
 
@@ -77,14 +82,22 @@ public class ToolController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteDataById(@PathVariable int id) {
+    public String deleteDataById(@PathVariable int id, Principal principal) {
+        User user = homeService.getUser(principal.getName());
+        if (!user.getRole().equals("admin")) {
+            throw new UnauthorizedActionException("You are not allowed to update this tool");
+        }
         toolService.deleteTool(id);
 
         return "redirect:/mainData";
     }
 
     @GetMapping("/addElement")
-    public String addElementPage(Model model){
+    public String addElementPage(Model model, Principal principal){
+        User user = homeService.getUser(principal.getName());
+        if (!user.getRole().equals("admin")) {
+            throw new UnauthorizedActionException("You are not allowed to update this tool");
+        }
         Tool tool = new Tool();
         model.addAttribute("newTool", tool);
         return "addElement";

@@ -1,5 +1,6 @@
 package Hope.controller.home;
 
+import Hope.exceptions.ResourceNotFoundException;
 import Hope.model.Tool;
 import Hope.model.ToolRepository;
 import Hope.model.User;
@@ -22,7 +23,7 @@ public class HomeService {
     }
 
     public User getUser(String username) {
-        return userRepository.findUserByUsername(username).orElse(null);
+        return userRepository.findUserByUsername(username).orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
     }
 
     public List<Tool> getPreviewsData() {

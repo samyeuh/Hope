@@ -1,5 +1,7 @@
 package Hope.controller.login;
 
+import Hope.exceptions.InvalidInputException;
+import Hope.exceptions.ResourceNotFoundException;
 import Hope.model.User;
 import Hope.model.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,15 +25,10 @@ public class LoginService {
 
     public boolean login(String username, String password) {
         if (username == null || username.isEmpty() || password == null || password.isEmpty()) {
-            System.out.println("Invalid input provided.");
-            return false;
+            throw new InvalidInputException("Invalid input provided.");
         }
 
-       Optional<User> users = userRepository.findUserByUsername(username);
-        if (users.isEmpty()){
-            return false;
-        }
-        User user = users.get();
+        User user = userRepository.findUserByUsername(username).orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
         return passwordEncoder.matches(password, user.getPassword());
     }
 }

@@ -1,5 +1,6 @@
 package Hope.controller.feedback;
 
+import Hope.exceptions.ResourceNotFoundException;
 import Hope.model.Feedback;
 import Hope.model.FeedbackRepository;
 import Hope.model.User;
@@ -23,6 +24,6 @@ public class FeedbackService {
     }
 
     public List<Feedback> getComments(int id) {
-        return feedbackRepository.findAllByToolId(id);
+        return feedbackRepository.findAllByToolId(id).orElseThrow(() -> new ResourceNotFoundException("Feedback", "tool_id", id));
     }
 }
