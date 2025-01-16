@@ -188,6 +188,5 @@ public class GlobalExceptionHandler {
  
 }
   ```
-
 Ces choix permettent de garantir un code lisible, maintenable et résilient, respectant ainsi les principes fondamentaux du Clean Code.
 
