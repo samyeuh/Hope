@@ -88,7 +88,7 @@ public class ToolController {
         return "redirect:/details/" + id;
     }
 
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public String deleteDataById(@PathVariable int id, Principal principal) {
         User user = homeService.getUser(principal.getName());
         if (!user.getRole().equals("admin")) {

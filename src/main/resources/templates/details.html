@@ -44,7 +44,9 @@
                     <i class="bi bi-pencil-square"></i> Editer
                 </button>
             </form>
-            <form th:action="@{/delete/{idData}(idData=${data.id})}" class="d-inline" th:if="${isAdmin}">
+            <form th:action="@{/delete/{idData}(idData=${data.id})}" method="post" class="d-inline" th:if="${isAdmin}">
+                <input type="hidden" name="_method" value="DELETE">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                 <button type="submit" class="btn btn-danger btn-sm" onclick="return confirmDelete()">
                     <i class="bi bi-x-square"></i> Supprimer
                 </button>
