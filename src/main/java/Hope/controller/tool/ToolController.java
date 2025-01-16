@@ -84,4 +84,17 @@ public class ToolController {
         return "redirect:/mainData";
     }
 
+    @GetMapping("/addElement")
+    public String addElementPage(Model model){
+        Tool tool = new Tool();
+        model.addAttribute("newTool", tool);
+        return "addElement";
+    }
+
+    @PostMapping("/submissionAddElement")
+    public String addElement(@ModelAttribute("newTool") Tool tool){
+        toolService.addTool(tool);
+
+        return "redirect:/home";
+    }
 }

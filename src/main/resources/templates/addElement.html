@@ -14,7 +14,7 @@
             <h2 class="card-title mb-0">Ajouter un outil</h2>
         </div>
         <div class="card-body">
-            <form th:action="@{/submissionAddElement}" th:object="${newDataHope}" method="post">
+            <form th:action="@{/submissionAddElement}" th:object="${newTool}" method="post">
                 <div class="mb-3">
                     <label for="formTitre" class="form-label">Titre</label>
                     <input th:field="*{titre}" class="form-control" id="formTitre" placeholder="Titre" required>

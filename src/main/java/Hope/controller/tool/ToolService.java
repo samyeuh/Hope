@@ -27,4 +27,6 @@ public class ToolService {
     public void deleteTool(int id){ toolRepository.deleteById(id); }
 
     public void updateTool(Tool data){ toolRepository.save(data); }
+
+    public void addTool(Tool data){ toolRepository.save(data); }
 }
