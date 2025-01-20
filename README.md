@@ -254,3 +254,17 @@ Le projet HOPE a été conçu en appliquant les principes SOLID lorsque cela ét
   }
   ```
   **Pertinence** : Respecté en injectant les dépendances via le constructeur (Spring gère ces injections via @Autowired).
+
+
+## Contributeurs
+
+Ce projet n'aurait pas pu être possible sans:
+- [Samy BOUHAMIDI](https://github.com/samyeuh)
+- [Cyril TAKAM](https://www.linkedin.com/in/cyril-takam-7852b919b/)
+- [Matthieu BRANDAO](https://www.linkedin.com/in/matthieu-brandao-6668a0221/)
+- [Guillaume GOMEZ](https://www.linkedin.com/in/guillaume-gomez-gg/)
+- [Aymar KINGOUM TAKA](https://www.linkedin.com/in/aymar-kingoum-taka-5455371a3/)
+- [Enzo SISINNI](https://www.linkedin.com/in/enzo-sisinni-29107620a/)
+
+Sous la supervision de notre professeur:
+- [Jacques AUGUSTIN](https://www.linkedin.com/in/jacquesaugustin/)
