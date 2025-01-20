@@ -17,6 +17,7 @@ HOPE est une application web visant à remplacer un fichier Excel existant pour 
 9. [Licence](#licence)
 10. [Conformité avec l’approche Clean Code](#conformité-avec-lapproche-clean-code)
 11. [Conformité aux principes SOLID](#conformité-aux-principes-solid)
+12. [Contributeurs](#contributeurs)
 
 
 ## Fonctionnalités Principales
