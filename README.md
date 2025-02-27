@@ -4,6 +4,8 @@
 
 HOPE est une application web visant à remplacer un fichier Excel existant pour homogénéiser l’utilisation des outils et plateformes pédagogiques. Cette solution fournit une interface intuitive pour les enseignants, étudiants et administrateurs, tout en facilitant la gestion et le partage d’informations éducatives.
 
+[Sujet](https://github.com/samyeuh/Hope/blob/main/utils/ALTN72%20-%20LSI%20-%20Projet.pdf)
+
 ## Sommaire
 
 1. [Fonctionnalités Principales](#fonctionnalités-principales)
